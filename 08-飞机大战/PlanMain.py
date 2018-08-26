@@ -30,10 +30,6 @@ class PlaneGame(object):
 
 		self.hero = HeroSprite()
 		self.hero_group = pygame.sprite.Group(self.hero)
-		
-		
-		
-
     	        
 	def __event_handler(self):
 		"""事件监听"""
@@ -47,14 +43,16 @@ class PlaneGame(object):
 				self.enemy_group.add(enemy)#通过add方法添加
 				self.hero.fire()
 		keys_pressed = pygame.key.get_pressed()
-		if keys_pressed[pygame.K_RIGHT]:
+		if keys_pressed[pygame.K_d]:
 			self.hero.speed = 2
-		elif keys_pressed[pygame.K_LEFT]:
+		elif keys_pressed[pygame.K_a]:
 			self.hero.speed = -2
-		elif keys_pressed[pygame.KEYDOWN]:
+		elif keys_pressed[pygame.K_w]:
+			self.hero.speed = 2
+			self.hero.speend = 0
+		elif keys_pressed[pygame.K_s]:
 			self.hero.speed = -2
-		elif keys_pressed[pygame.KEYUP]:
-			self.hero.speed = +2
+			self.hero.speed = 0
 		else:
 			self.hero.speed = 0
 		if keys_pressed[pygame.K_SPACE]:
@@ -64,7 +62,18 @@ class PlaneGame(object):
 
 	def __check_collide(self):
 		"""碰撞检测"""
-		pass
+		pygame.sprite.groupcollide(self.hero.bullets, self.enemy_group, True, True)
+
+	    # 2. 敌机撞毁英雄
+		enemies = pygame.sprite.spritecollide(self.hero, self.enemy_group, True)
+		# 判断列表时候有内容
+		if len(enemies) > 0:
+
+	        # 让英雄牺牲
+			self.hero.kill()
+
+	        # 结束游戏
+			PlaneGame.__game_over()
 	def __update_sprites(self):
 		"""更新精灵组"""
 		self.bg_group.update()
@@ -79,6 +88,8 @@ class PlaneGame(object):
 
 		self.hero.bullet_group.update()
 		self.hero.bullet_group.draw(self.screen)
+		self.hero.bullets.update()
+		self.hero.bullets.draw(self.screen)
 
 	@staticmethod
 	def __game_over():

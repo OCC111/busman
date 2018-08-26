@@ -22,6 +22,7 @@ class EnemySprite(GameSprite):#敌机子类
 		self.speed = random.randint(1,10)
 		# self.speed = 50
 
+
 	def update(self):
 		super().update()
 		if self.rect.top >= SCREEN_RECT.height:
@@ -48,7 +49,8 @@ class HeroSprite(GameSprite):#英雄
 		self.rect.centerx = SCREEN_RECT.centerx
 		self.rect.top = 550
 		self.bullet_group = pygame.sprite.Group()
-
+		self.bullets = pygame.sprite.Group()
+		
 
 	def update(self):
 		super().update()
