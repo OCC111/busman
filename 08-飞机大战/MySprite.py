@@ -2,6 +2,8 @@ import random
 import pygame
 SCREEN_RECT = pygame.Rect(0,0,480,700)
 CREATE_ENEMY_EVENT = pygame.USEREVENT#常量
+FIRE_BULLET = pygame.USEREVENT + 1 #发射子弹常量
+
 class GameSprite(pygame.sprite.Sprite):#父类
 	def __init__(self,imagename,speed=1):
 		super().__init__()#调用父类方法
@@ -45,12 +47,12 @@ class BackGroundSprite(GameSprite):#背景精灵类
 class HeroSprite(GameSprite):#英雄 
 	def __init__(self):
 		self.imagename = "./images/hero.gif"
-		super().__init__(self.imagename,0)#0速度
+		super().__init__(self.imagename,3)#0速度
 		self.rect.centerx = SCREEN_RECT.centerx
 		self.rect.top = 550
 		self.bullet_group = pygame.sprite.Group()
 		self.bullets = pygame.sprite.Group()
-		
+		self.down_group = pygame.sprite.Group()
 
 	def update(self):
 		super().update()
@@ -98,6 +100,17 @@ class BulletSprite(GameSprite):#子弹精灵
 	def update(self):
 		super().update()
 		if self.rect.bottom <= 0:
-			self.kill()		
+			self.kill()	
 
-						
+class Hero_down(GameSprite):
+	def __init__(self):
+		self.imagename = "./images/hero_blowup_n4.png"
+		super().__init__(self.imagename,5)
+		self.rect = HeroSprite
+
+		self.down_group = pygame.sprite.Group()
+
+	def update(self):
+		super().update()
+		
+
