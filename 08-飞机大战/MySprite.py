@@ -32,8 +32,8 @@ class EnemySprite(GameSprite):#敌机子类
 
 
 class BackGroundSprite(GameSprite):#背景精灵类
-	def __init__(self,is_alt=False):
-		self.imagename = "./images/background.png"
+	def __init__lf,is_alt=False):
+		self.(seimagename = "./images/background.png"
 		super().__init__(self.imagename,10)
 		if is_alt:
 			self.rect.y = - self.rect.height
@@ -42,7 +42,6 @@ class BackGroundSprite(GameSprite):#背景精灵类
 		super().update()
 		if self.rect.top >= SCREEN_RECT.height:
 			self.rect.y = - self.rect.height
-
 
 class HeroSprite(GameSprite):#英雄 
 	def __init__(self):
@@ -57,8 +56,8 @@ class HeroSprite(GameSprite):#英雄
 	def update(self):
 		super().update()
 		self.rect.x+=self.speed	
-		self.rect.y+=self.speed
-		
+#self.rect.y+=self.speed
+			
 		if self.rect.left <= 0:
 			self.rect.left = 0
 

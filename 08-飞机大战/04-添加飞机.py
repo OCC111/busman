@@ -17,3 +17,4 @@ while True:
 	pygame.display.update()#更新
 	
 pygame.quit()
+ 

@@ -9,9 +9,7 @@ class PlaneGame(object):
 		self.a = True
 
 		pygame.time.set_timer(CREATE_ENEMY_EVENT,1000)#敌机定时事件
-		pygame.time.set_timer(FIRE_BULLET,200)#子弹定时事件
-		
-
+#pygame.time.set_timer(FIRE_BULLET,200)#子弹定时事件
 
 	def start_game(self):
 		while True:
@@ -60,10 +58,7 @@ class PlaneGame(object):
 			self.hero.speed = 0
 		if keys_pressed[pygame.K_SPACE]:
 			#print("该发射子弹了")
-			if self.a :
-				self.a = False
-			else:
-				self.a = True
+			self.hero.fire()
 
 
 	def __check_collide(self):
@@ -100,7 +95,6 @@ class PlaneGame(object):
 
 		self.down.down_group.update()
 		self.down.down_group.draw(self.screen)
-
 	
 	@staticmethod
 	def __game_over():
